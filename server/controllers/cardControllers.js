@@ -29,6 +29,10 @@ exports.uploadCard = async (req, res) => {
 };
 
 exports.getCards = async (req, res) => {
-  const cards = await Card.find().sort({ createdAt: -1 });
-  res.json(cards);
+  try {
+    const cards = await Card.find().sort({ createdAt: -1 });
+    res.json(cards);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
